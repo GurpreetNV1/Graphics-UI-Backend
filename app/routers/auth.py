@@ -15,6 +15,7 @@ from app.core.dependencies import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
+
 @router.post("/login", response_model=SuccessResponse)
 async def login(payload: LoginRequest):
     try:

@@ -1,5 +1,4 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
 class Settings(BaseSettings):
     # JWT
     jwt_secret_key: str
