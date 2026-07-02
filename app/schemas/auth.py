@@ -22,6 +22,3 @@ class VerifyOtpRequest(BaseModel):
 class ResetPasswordRequest(BaseModel):
     reset_token: str
     new_password: str
-
-class LogoutRequest(BaseModel):
-    pass  # user identified via access token in header, no body needed

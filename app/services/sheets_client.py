@@ -12,7 +12,12 @@ async def call_apps_script(action: str, payload: dict) -> dict | None:
         async with httpx.AsyncClient(timeout=15.0, follow_redirects=True) as client:
             response = await client.post(settings.apps_script_url, json=body)
             response.raise_for_status()
-            return response.json()
+            try:
+                return response.json()
+            except ValueError:
+                raise SheetsServiceError(
+                    f"Apps Script returned non-JSON response. Status: {response.status_code}, Body: {response.text[:500]}"
+                )
     except httpx.HTTPError as e:
         raise SheetsServiceError(f"Apps Script call failed: {str(e)}")
 
