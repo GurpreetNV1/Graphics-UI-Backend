@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.exceptions import AppException
 from app.middleware.error_handler import app_exception_handler, unhandled_exception_handler
 from app.routers import auth
+from app.services import drive_client
+from app.config import settings
+from app.services import requests_sheets_client
 
 app = FastAPI(title="Creative Request System API")
 
@@ -26,3 +29,15 @@ app.include_router(auth.router)
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
+
+
+@app.get("/test-drive")
+async def test_drive():
+    folder = drive_client.create_folder("Test Request Folder", settings.google_test_folder_id)
+    return {"created_folder": folder}
+
+
+@app.get("/test-requests-sheet")
+async def test_requests_sheet():
+    result = await requests_sheets_client.list_requests()
+    return {"requests": result}
