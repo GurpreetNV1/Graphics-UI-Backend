@@ -45,3 +45,11 @@ class SheetsServiceError(AppException):
 class InsufficientRoleError(AppException):
     def __init__(self):
         super().__init__("You do not have permission to perform this action", status_code=403, error_code="FORBIDDEN")
+
+class RequestNotFoundError(AppException):
+    def __init__(self):
+        super().__init__("Request not found", status_code=404, error_code="REQUEST_NOT_FOUND")
+
+class InvalidStatusTransitionError(AppException):
+    def __init__(self, message: str = "This action isn't allowed for the request's current status"):
+        super().__init__(message, status_code=400, error_code="INVALID_STATUS_TRANSITION")

@@ -9,7 +9,7 @@ async def call_apps_script(action: str, payload: dict) -> dict | None:
         "payload": payload,
     }
     try:
-        async with httpx.AsyncClient(timeout=15.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(timeout=40.0, follow_redirects=True) as client:
             response = await client.post(settings.apps_script_url, json=body)
             response.raise_for_status()
             try:

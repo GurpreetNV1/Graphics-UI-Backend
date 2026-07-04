@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     google_service_account_path: str
     google_test_folder_id: str
 
+    google_workspace_domain: str
+    
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
