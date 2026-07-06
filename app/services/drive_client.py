@@ -86,3 +86,27 @@ def set_domain_permission(file_id: str, domain: str, allow_download: bool):
         body={"copyRequiresWriterPermission": not allow_download},
         supportsAllDrives=True,
     ).execute()
+
+def get_or_create_week_folder(week_label: str, parent_id: str) -> dict:
+    """Finds a folder named week_label under parent_id, creates it if missing."""
+    service = _get_drive_service()
+    results = service.files().list(
+        q=f"'{parent_id}' in parents and name = '{week_label}' and trashed = false and mimeType = 'application/vnd.google-apps.folder'",
+        fields="files(id, webViewLink)",
+        supportsAllDrives=True,
+        includeItemsFromAllDrives=True,
+    ).execute()
+    existing = results.get("files", [])
+    if existing:
+        return {"id": existing[0]["id"], "link": existing[0].get("webViewLink")}
+    return create_folder(week_label, parent_id)
+
+
+def upload_text_file(content: str, filename: str, parent_id: str) -> dict:
+    """Uploads a plain text file (used for captions)."""
+    return upload_file(
+        file_bytes=content.encode("utf-8"),
+        filename=filename,
+        mime_type="text/plain",
+        parent_id=parent_id,
+    )

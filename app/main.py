@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.exceptions import AppException
 from app.middleware.error_handler import app_exception_handler, unhandled_exception_handler
-from app.routers import auth, requests
+from app.routers import auth, requests, weekly
 from app.services import drive_client
 from app.config import settings
 from app.services import requests_sheets_client
@@ -25,6 +25,7 @@ app.add_exception_handler(Exception, unhandled_exception_handler)
 
 app.include_router(auth.router)
 app.include_router(requests.router)
+app.include_router(weekly.router)
 
 
 @app.get("/health")
