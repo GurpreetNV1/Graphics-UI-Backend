@@ -53,3 +53,12 @@ class RequestNotFoundError(AppException):
 class InvalidStatusTransitionError(AppException):
     def __init__(self, message: str = "This action isn't allowed for the request's current status"):
         super().__init__(message, status_code=400, error_code="INVALID_STATUS_TRANSITION")
+
+class FeedbackRequiredError(AppException):
+    def __init__(self):
+        super().__init__("Feedback is required when marking a post as posted", status_code=400, error_code="FEEDBACK_REQUIRED")
+
+class WeeklyPostNotFoundError(AppException):
+    def __init__(self):
+        super().__init__("Weekly post not found", status_code=404, error_code="WEEKLY_POST_NOT_FOUND")
+

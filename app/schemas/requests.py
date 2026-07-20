@@ -39,3 +39,6 @@ class UpdateRequestPayload(BaseModel):
 class AddCommentPayload(BaseModel):
     message: str
     comment_type: str = "general"  # "clarification" / "general" / "update_note"
+
+class WeeklyFeedbackPayload(BaseModel):
+    feedback: str

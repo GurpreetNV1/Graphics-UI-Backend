@@ -27,6 +27,9 @@ class Settings(BaseSettings):
 
     google_workspace_domain: str
     google_weekly_folder_id: str
+
+    weekly_apps_script_url: str
+    weekly_apps_script_secret: str
     
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
