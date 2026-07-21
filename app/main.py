@@ -15,7 +15,7 @@ app.add_middleware(
         "http://localhost:3000",
         "http://localhost:5173",
         "https://graphics-ui-frontend.vercel.app",
-        "http://graphics.acmemigration.com"
+        "https://graphics.acmemigration.com"
     ],
     allow_credentials=True,
     allow_methods=["*"],
