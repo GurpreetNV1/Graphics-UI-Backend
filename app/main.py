@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.exceptions import AppException
 from app.middleware.error_handler import app_exception_handler, unhandled_exception_handler
@@ -31,6 +31,11 @@ app.include_router(weekly.router)
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
+
+
+@app.head("/")
+async def root_head() -> Response:
+    return Response(status_code=200)
 
 
 @app.get("/test-drive")
