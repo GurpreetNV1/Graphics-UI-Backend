@@ -32,6 +32,9 @@ app.include_router(weekly.router)
 async def health_check():
     return {"status": "ok"}
 
+@app.get("/")
+async def health_check():
+    return {"status": "ok"}
 
 @app.head("/")
 async def root_head() -> Response:
