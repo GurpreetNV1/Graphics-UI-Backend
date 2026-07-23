@@ -23,7 +23,7 @@ def _set_refresh_cookie(response: Response, refresh_token: str):
         key=REFRESH_COOKIE_NAME,
         value=refresh_token,
         httponly=True,
-        secure=False,      # set True once you're on HTTPS in production
+        secure=True,      # set True once you're on HTTPS in production
         samesite="lax",
         max_age=REFRESH_COOKIE_MAX_AGE,
         path="/",
